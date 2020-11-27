@@ -1,6 +1,6 @@
-# wsp-ive-html2pdf
+# Mercer-HTML2PDF
 
-> used to test request and process
+> used to process HTML to PDF requests
 
 ## Installing
 
@@ -14,10 +14,9 @@ $ npm install
 
 Requires these process environment variables to be set
 
-* `DATABASE` - this is the connection string for MariaDB database used for users and doc tables.
-* `TEST_EMAIL` - this is the email that can be used to access the public REST API
-* `TEST_PASSWORD` - this is the password that can be used to access the public REST API
-* `TEST_FILE` - this is a public URL that can be used for testing
+* `EMAIL` - this is the email that can be used to access the public REST API
+* `PASSWORD` - this is the password that can be used to access the public REST API
+* `SLOWDOWN` - this is set the delay in milliseconds that the app applies between requests
 
 The following environment variables are placeholders required when job: html-to-df is configured with the connection to docrapter and ftp. Note that FTP details will need be passed as JSON (not shown here) to allow for routing brand to appropriate location.
 
@@ -47,21 +46,15 @@ The following environment variables are placeholders required when job: html-to-
 * `[doc-html-url]` - URL of source HTML
 
 
-### Add user
+### User management
 
-Used to create a user.
-
-Disabled by default. To add user remove `authenticate('jwt')` requirement on `src/services/users/users.hooks.js`.
+To change credentials for user, refer to following code that references process environment variables in the `src/app.js`.
 
 ```
-POST [endpoint]/users
-
-{
-	"email":"[request-email]",
-	"password":"[request-password]"
-
-}
-
+app.service('users').create({
+  email: process.env.USERNAME,
+  password: process.env.PASSWORD
+});
 ```
 
 ### Authenticate user
@@ -74,7 +67,7 @@ accessToken is used to authenticate requests.
 POST [endpoint]/authenticate
 
 {
-  "strategy": "local",
+	"strategy": "local",
 	"email":"[request-email]",
 	"password":"[request-password]"
 
@@ -84,65 +77,26 @@ POST [endpoint]/authenticate
 
 On success body of request returns `accessToken`.
 
-### Add HTML document for processing
+Note that
+
+* `[request-email]` contains the contents of `process.env.USERNAME`
+* `[request-password]` contains the contents of `process.env.PASSWORD`
+
+### Add PDF document for processing
 
 Used to add a HTML document to be converted to PDF and stored to FTP.
 
 accessToken is used to authenticate requests.
 
 ```
-POST [endpoint]/docs
+POST [endpoint]/pdf
 
 In Auth for Bearer Token use accessToken.
 
 {
-  "brand": "[doc-brand]",
+	"brand": "[doc-brand]",
 	"html":"[doc-html-url]"
 
 }
-
-```
-
-## Documentation
-
-Following is a diagram with notes following.
-
-![](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/process-flow.png)
-
-
-
-
-In this sequence diagram there are two main processes that are run independently of each other.
-
-(A.1) is used to represent putting data on processing queue.
-
-SFMC uses REST API `/docs` exposed on [APP](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/src/app.js) to [add a HTML document for processing](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/README.md#add-html-document-for-processing) to the queue.
-
-(B.1) is used to represent processing.
-
-[WORKER](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/src/worker.js) schedules a [HTML to PDF](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/jobs/html-to-pdf.js) job to process docs on queue.
-
-Processing can be scaled using
-
-1. [WORKER](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/src/worker.js) interval which is currently set to running [HTML to PDF](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/jobs/html-to-pdf.js) job  `every 60 seconds`
-2. [HTML to PDF](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/jobs/html-to-pdf.js) job concurrency which is currently set to 64.
-
-With these setting application could potentially convert 3,840 docs per hour.
-
-This is a placeholder whilst in development for getting the work done.
-
-Currently the [HTML to PDF](https://github.com/websiteplus/wsp-ive-html2pdf/blob/master/jobs/html-to-pdf.js) job waits 40 seconds whilst doing nothing.
-
-
-Code used for sequence diagram.
-
-```
-title SFMC HTML to PDF on FTP requirement
-  seq
-    SFMC -> APP: (A.1) puts doc on processing queue
-  end
-  seq
-    APP -> SFTP: (B.1) process HTML to PDF and put on SFTP
-  end
 
 ```

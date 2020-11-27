@@ -8,6 +8,7 @@ const logger = require('./logger');
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
+const slowDown = require('express-slow-down');
 const socketio = require('@feathersjs/socketio');
 
 const middleware = require('./middleware');
@@ -20,6 +21,17 @@ const authentication = require('./authentication');
 const sftp = require('./sftp');
 
 const app = express(feathers());
+
+(async function () {
+  await app.set('ERRORS', 0);
+})();
+
+app.enable('trust proxy');
+app.use(slowDown({
+  windowMs: process.env.SLOWDOWN,
+  delayAfter: 1,
+  delayMs: process.env.SLOWDOWN,
+}));
 
 // Load app configuration
 app.configure(configuration());

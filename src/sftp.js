@@ -9,7 +9,9 @@ module.exports = async function (app) {
     port: process.env.FTP_PORT,
     username: process.env.FTP_USERNAME,
     password: process.env.FTP_PASSWORD,
-    algorithms: {                 serverHostKey: ['ssh-rsa', 'ssh-dss']               },
+    algorithms: {
+      serverHostKey: ['ssh-rsa', 'ssh-dss']
+    },
     readyTimeout: 10000000
   });
   await app.set('sftp', sftp);

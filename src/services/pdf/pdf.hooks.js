@@ -1,10 +1,9 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
+//const { authenticate } = require('@feathersjs/authentication').hooks;
 const toPDF = require('./api/toPDF');
-
-const wait = require('wait');
 
 module.exports = {
   before: {
+//    all: [ authenticate('jwt') ],
     all: [],
     find: [],
     get: [],

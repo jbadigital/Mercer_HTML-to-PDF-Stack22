@@ -39,7 +39,7 @@ module.exports = function(context) {
 
         var dt = DateTime.local();
         //let filename=SFMC.Communication_Name+'_'+context.result.download_id+'_'+dt.toFormat('yyyy-MM-dd')+'T'+dt.toFormat('HH-mm-ss')+'.pdf';
-        let filename = SFMC.Brand_Type + '-' + Interaction_Name + '-' + dt.toFormat('yyyy-MM-dd')+'T'+dt.toFormat('HH-mm-ss') + '-' + GUID_Code + '.pdf';
+        let filename = SFMC.Brand_Type + '-' + SFMC.Interaction_Name + '-' + dt.toFormat('yyyy-MM-dd')+'T'+dt.toFormat('HH-mm-ss') + '-' + SFMC.GUID_Code + '.pdf';
 
         (async function () {
           await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);

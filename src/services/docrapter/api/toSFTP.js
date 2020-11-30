@@ -20,7 +20,7 @@ module.exports = function(context) {
       });
 
       const client = new ET_Client(process.env.SFMC_CLIENTID, process.env.SFMC_CLIENTSECRET, null, { origin: process.env.SFMC_ORIGIN, authOrigin: process.env.SFMC_AUTHORIGIN, soapOrigin: process.env.SFMC_SOAPORIGIN, authOptions: { authVersion : 2, accountId : process.env.SFMC_ACCOUNTID, scope : process.env.SFMC_SCOPE, applicationType : 'server'}});
-      const props = ['PDF_Status','Communication_Name'];
+      const props = ['PDF_Status','Communication_Name','BRAND_TYPE','Interaction_Name','GUID'];
       const filter = {
         leftOperand: 'PDF_Status',
         operator: 'equals',

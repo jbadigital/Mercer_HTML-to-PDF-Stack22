@@ -100,3 +100,13 @@ In Auth for Bearer Token use accessToken.
 }
 
 ```
+
+## Testing
+
+Set environment variable `SERVER` to name of service used for testing.
+
+Test is limited to functionality as per `/test/app.test.js`
+
+Note also `testLoad.js` which was used for testing app for load.
+
+These tests are of little or no use as testing needs to include SFMC payload and services.

@@ -37,7 +37,7 @@ module.exports = function(context) {
         var dt = DateTime.local();
         let filename=SFMC.Communication_Name+'_'+context.result.download_id+'_'+dt.toFormat('yyyy-MM-dd')+'T'+dt.toFormat('HH-mm-ss')+'.pdf';
         (async function () {
-          await context.app.settings.sftp.put(Buffer.from(pdf.data), '/Import/t/'+filename);
+          await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
         })();
 
         const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};

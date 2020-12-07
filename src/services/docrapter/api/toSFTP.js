@@ -26,7 +26,9 @@ module.exports = function(context) {
         operator: 'equals',
         rightOperand: context.result.download_id
       };
+
       client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {
+
         if (err) throw new Error(err);
 
         let SFMC={};
@@ -45,6 +47,8 @@ module.exports = function(context) {
           await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
         })();
 
+        if (err) throw new Error(err);
+        
         const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
         const props={};
         props.PDF_Status=context.result.download_id;

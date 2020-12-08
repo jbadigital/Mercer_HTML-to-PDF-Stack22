@@ -56,7 +56,7 @@ module.exports = function(context) {
         const props={};
         props.PDF_Status=context.result.download_id;
         props.PDF_Print_Processed = 1;
-        props.PDF_Document_Name = filename;
+        //props.PDF_Document_Name = filename;
 
         client.dataExtensionRow({props,keyField,Name: 'HTML to PDF - Status Log'}).patch((err, response) => {
 

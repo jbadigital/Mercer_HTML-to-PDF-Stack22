@@ -47,14 +47,9 @@ module.exports = function(context) {
         let filename = SFMC.PDF_Document_Name;
 
         (async function () {
-          try {
-            await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
-          } catch (err) {
-            logger.error(err);
-            return;
-          }
+          await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
         })();
-
+        
         const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
         const props={};
         props.PDF_Status=context.result.download_id;

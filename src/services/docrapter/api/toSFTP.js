@@ -42,32 +42,33 @@ module.exports = function(context) {
 
         var dt = DateTime.local();
         //let filename=SFMC.Communication_Name+'_'+context.result.download_id+'_'+dt.toFormat('yyyy-MM-dd')+'T'+dt.toFormat('HH-mm-ss')+'.pdf';
-        
+
         //let filename = SFMC.Brand_Type + '-' + SFMC.Interaction_Name + '-' + dt.toFormat('yyyy-MM-dd')+'T'+dt.toFormat('HH-mm-ss') + '-' + SFMC.GUID_Code + '.pdf';
         let filename = SFMC.PDF_Document_Name;
 
         (async function () {
           try {
+
             await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+
+            const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
+            const props={};
+            props.PDF_Status=context.result.download_id;
+            props.PDF_Print_Processed = 1;
+            props.PDF_Document_Name = filename;
+
+            client.dataExtensionRow({props,keyField,Name: 'HTML to PDF - Status Log'}).patch((err, response) => {
+
+              if (err) throw new Error(err);
+
+            });
+
+
           } catch (err) {
             logger.error(err);
             return;
           }
         })();
-        
-        const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
-        const props={};
-        props.PDF_Status=context.result.download_id;
-        props.PDF_Print_Processed = 1;
-        props.PDF_Document_Name = filename;
-
-        client.dataExtensionRow({props,keyField,Name: 'HTML to PDF - Status Log'}).patch((err, response) => {
-
-          if (err) throw new Error(err);
-
-        //if response.status === 200 then return to SFMC API success)
-        //else return error to SFMC API
-        });
 
       });
 

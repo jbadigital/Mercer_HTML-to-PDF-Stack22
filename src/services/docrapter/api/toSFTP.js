@@ -27,7 +27,8 @@ module.exports = function(context) {
         rightOperand: context.result.download_id
       };
 
-      client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {
+      client.dataExtensionRow({props, Name: 'Master_Send_Log_V2', filter}).get((err, response) => {
+      //client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {
 
         if (err) throw new Error(err);
 

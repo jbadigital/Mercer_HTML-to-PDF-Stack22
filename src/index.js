@@ -4,7 +4,7 @@ const throng = require('throng');
 
 const logger = require('./logger');
 
-var WORKERS = process.env.WEB_CONCURRENCY || 1;
+var WORKERS = process.env.WEB_CONCURRENCY || 3000;
 
 throng({
   workers: WORKERS,

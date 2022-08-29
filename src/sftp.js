@@ -12,7 +12,7 @@ module.exports = async function (app) {
     algorithms: {
       serverHostKey: ['ssh-rsa', 'ssh-dss']
     },
-    readyTimeout: 5000000000
+    readyTimeout: 500000000
   });
   await app.set('sftp', sftp);
 

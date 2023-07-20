@@ -9,6 +9,7 @@ module.exports = async function (app) {
     port: process.env.FTP_PORT,
     username: process.env.FTP_USERNAME,
     password: process.env.FTP_PASSWORD,
+    debug: console.log,
     algorithms: {
       serverHostKey: ['ssh-rsa', 'ssh-dss']
     },

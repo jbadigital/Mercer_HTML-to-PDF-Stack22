@@ -49,7 +49,7 @@ module.exports = function(context) {
 
         (async function () {
           try {
-            console.log(context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+
             await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
 
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};

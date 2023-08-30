@@ -11,14 +11,14 @@ module.exports = function(context) {
 
   (async function () {
     try {
-
+      console.log('step 1 - start');
       const pdf = await axios({
         method: 'get',
         url: context.result.download_url,
         responseType: 'arraybuffer',
         responseEncoding: 'binary'
       });
-
+      console.log('step 1 - finish');
       const client = new ET_Client(process.env.SFMC_CLIENTID, process.env.SFMC_CLIENTSECRET, null, { origin: process.env.SFMC_ORIGIN, authOrigin: process.env.SFMC_AUTHORIGIN, soapOrigin: process.env.SFMC_SOAPORIGIN, authOptions: { authVersion : 2, accountId : process.env.SFMC_ACCOUNTID, scope : process.env.SFMC_SCOPE, applicationType : 'server'}});
       const props = ['PDF_Status','Communication_Name','BRAND_TYPE','Interaction_Name','GUID','PDF_Document_Name'];
       const filter = {
@@ -26,10 +26,10 @@ module.exports = function(context) {
         operator: 'equals',
         rightOperand: context.result.download_id
       };
-
+      console.log('step 2 - start');
       client.dataExtensionRow({props, Name: 'Master_Send_Log_V2', filter}).get((err, response) => {
       //client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {
-
+        console.log('step 2 - finish');
         if (err) throw new Error(err);
 
         let SFMC={};
@@ -49,21 +49,22 @@ module.exports = function(context) {
 
         (async function () {
           try {
-
+            console.log(context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+            console.log('step 3 - start');
             await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
-
+            console.log('step 3 - finish');
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
             const props={};
             props.PDF_Status=context.result.download_id;
             props.PDF_Print_Processed = 1;
             props.PDF_Document_Name = filename;
-
+            console.log('step 4 - start');
             client.dataExtensionRow({props,keyField,Name: 'HTML to PDF - Status Log'}).patch((err, response) => {
 
               if (err) throw new Error(err);
 
             });
-
+            console.log('step 4 - finish');
 
           } catch (err) {
             logger.error(err);

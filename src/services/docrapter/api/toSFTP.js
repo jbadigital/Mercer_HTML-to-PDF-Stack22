@@ -19,7 +19,8 @@ module.exports = function(context) {
         responseEncoding: 'binary'
       });
       console.log ( typeof pdf.data ==='string' ? 'step 1 - result: '+ pdf.data.length : 'step 1 - result: not a atring ' );
-      console.log (typeof pdf.data);
+      console.log (context.result.download_url);
+      
       console.log('step 1 - finish');
       const client = new ET_Client(process.env.SFMC_CLIENTID, process.env.SFMC_CLIENTSECRET, null, { origin: process.env.SFMC_ORIGIN, authOrigin: process.env.SFMC_AUTHORIGIN, soapOrigin: process.env.SFMC_SOAPORIGIN, authOptions: { authVersion : 2, accountId : process.env.SFMC_ACCOUNTID, scope : process.env.SFMC_SCOPE, applicationType : 'server'}});
       const props = ['PDF_Status','Communication_Name','BRAND_TYPE','Interaction_Name','GUID','PDF_Document_Name'];

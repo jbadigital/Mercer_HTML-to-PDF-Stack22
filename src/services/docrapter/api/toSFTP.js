@@ -18,6 +18,7 @@ module.exports = function(context) {
         responseType: 'arraybuffer',
         responseEncoding: 'binary'
       });
+      console.log ( typeof pdf.data ==='string' ? 'step 1 - result: '+ pdf.data.length : 'step 1 - result: not a atring ' );
       console.log('step 1 - finish');
       const client = new ET_Client(process.env.SFMC_CLIENTID, process.env.SFMC_CLIENTSECRET, null, { origin: process.env.SFMC_ORIGIN, authOrigin: process.env.SFMC_AUTHORIGIN, soapOrigin: process.env.SFMC_SOAPORIGIN, authOptions: { authVersion : 2, accountId : process.env.SFMC_ACCOUNTID, scope : process.env.SFMC_SCOPE, applicationType : 'server'}});
       const props = ['PDF_Status','Communication_Name','BRAND_TYPE','Interaction_Name','GUID','PDF_Document_Name'];
@@ -25,10 +26,7 @@ module.exports = function(context) {
         leftOperand: 'PDF_Status',
         operator: 'equals',
         rightOperand: context.result.download_id
-      };
-
-      console.log ( typeof pdf.data ==='string' ? 'step 1 - result: '+ pdf.data.length : 'step 1 - result: not a atring ' );
-      
+      }; 
       console.log('step 2 - start');
       client.dataExtensionRow({props, Name: 'Master_Send_Log_V2', filter}).get((err, response) => {
       //client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {

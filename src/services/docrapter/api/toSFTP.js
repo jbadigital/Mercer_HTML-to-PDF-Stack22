@@ -18,7 +18,8 @@ module.exports = function(context) {
         responseType: 'arraybuffer',
         responseEncoding: 'binary'
       });
-      console.log ( typeof pdf.data.toString() ==='string' ? 'step 1 - result: '+ pdf.data.toString().length : 'step 1 - result: not a atring ' );
+      //console.log ( typeof pdf.data.toString() ==='string' ? 'step 1 - result: '+ pdf.data.toString().length : 'step 1 - result: not a atring ' );
+      console.log ( test ? 'step 1 - result: '+ pdf.data.toString('utf8').length : 'step 1 - result: not a string ' );
       console.log (context.result.download_url);
       
       console.log('step 1 - finish');

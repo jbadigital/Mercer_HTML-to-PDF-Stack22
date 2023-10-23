@@ -4,6 +4,7 @@ const axios = require('axios');
 const logger = require('./../../../logger');
 const ET_Client = require('sfmc-fuelsdk-node');
 const { DateTime } = require('luxon');
+const fs = require('fs');
 
 module.exports = function(context) {
 
@@ -58,7 +59,9 @@ module.exports = function(context) {
           try {
             console.log(context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
             console.log('step 3 - start');
-            await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+            fs.writeFileSync(filename, pdf.data);
+            await context.app.settings.sftp.fastPut(filename, context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+            //await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
             console.log('step 3 - finish');
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
             const props={};

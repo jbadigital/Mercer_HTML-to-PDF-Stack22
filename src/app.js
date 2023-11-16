@@ -18,7 +18,7 @@ const channels = require('./channels');
 
 const authentication = require('./authentication');
 
-const sftp = require('./sftp');
+// const sftp = require('./sftp');
 const printmatrix = require('./printmatrix');
 
 const app = express(feathers());

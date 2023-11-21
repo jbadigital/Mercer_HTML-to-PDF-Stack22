@@ -14,7 +14,7 @@ module.exports = function(context) {
 
   (async function () {
     try {
-      console.log('step 1 - start');
+      //console.log('step 1 - start');
       const pdf = await axios({
         method: 'get',
         url: context.result.download_url,
@@ -26,9 +26,9 @@ module.exports = function(context) {
       //var test=pdf.data.toString('utf8');
       //console.log ( test ? 'step 1 - result: '+ pdf.data.toString('utf8').length : 'step 1 - result: not a string ' );
       
-      console.log (context.result.download_url);
+      //console.log (context.result.download_url);
       
-      console.log('step 1 - finish');
+      //console.log('step 1 - finish');
       const client = new ET_Client(process.env.SFMC_CLIENTID, process.env.SFMC_CLIENTSECRET, null, { origin: process.env.SFMC_ORIGIN, authOrigin: process.env.SFMC_AUTHORIGIN, soapOrigin: process.env.SFMC_SOAPORIGIN, authOptions: { authVersion : 2, accountId : process.env.SFMC_ACCOUNTID, scope : process.env.SFMC_SCOPE, applicationType : 'server'}});
       const props = ['PDF_Status','Communication_Name','BRAND_TYPE','Interaction_Name','GUID','PDF_Document_Name'];
       const filter = {
@@ -36,10 +36,10 @@ module.exports = function(context) {
         operator: 'equals',
         rightOperand: context.result.download_id
       }; 
-      console.log('step 2 - start');
+      //console.log('step 2 - start');
       client.dataExtensionRow({props, Name: 'Master_Send_Log_V2', filter}).get((err, response) => {
       //client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {
-        console.log('step 2 - finish');
+        //console.log('step 2 - finish');
         if (err) throw new Error(err);
 
         let SFMC={};
@@ -84,13 +84,13 @@ module.exports = function(context) {
             props.PDF_Status=context.result.download_id;
             props.PDF_Print_Processed = 1;
             props.PDF_Document_Name = filename;
-            console.log('step 4 - start');
+            //console.log('step 4 - start');
             client.dataExtensionRow({props,keyField,Name: 'HTML to PDF - Status Log'}).patch((err, response) => {
 
               if (err) throw new Error(err);
 
             });
-            console.log('step 4 - finish');
+            //console.log('step 4 - finish');
 
           } catch (err) {
             logger.error(err);

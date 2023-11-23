@@ -4,8 +4,8 @@ const axios = require('axios');
 const logger = require('./../../../logger');
 const ET_Client = require('sfmc-fuelsdk-node');
 const { DateTime } = require('luxon');
-const SFTP = require('ssh2-sftp-client');
-const sftp = new SFTP();
+//const SFTP = require('ssh2-sftp-client');
+//const sftp = new SFTP();
 
 
 module.exports = function(context) {
@@ -62,7 +62,7 @@ module.exports = function(context) {
             console.log(context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
             console.log('step 3 - start');
 
-            await sftp.connect({
+           /* await sftp.connect({
             host: process.env.FTP_HOST,
             port: process.env.FTP_PORT,
             username: process.env.FTP_USERNAME,
@@ -72,12 +72,12 @@ module.exports = function(context) {
               serverHostKey: ['ssh-rsa', 'ssh-dss']
             },
             readyTimeout: 10000000
-            });
+            });*/
            
 
             
-            await sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
-            await sftp.end();
+            await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+            //await sftp.end();
             console.log('step 3 - finish');
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
             const props={};

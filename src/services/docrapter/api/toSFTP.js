@@ -41,6 +41,9 @@ module.exports = function(context) {
       //client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {
         //console.log(filter);
         //console.log(response);
+
+        if (err) { console.log("Step - 2 Error:", err); } 
+        
         console.log('step 2 - finish');
         if (err) throw new Error(err);
 

@@ -43,6 +43,8 @@ module.exports = function(context) {
         //console.log(response);
 
         if (err) { console.log("Step - 2 Error:", err); } 
+        console.log("Step - 2 filter: ", filter);
+        console.log("Step - 2 response: ", response);
         
         console.log('step 2 - finish');
         if (err) throw new Error(err);

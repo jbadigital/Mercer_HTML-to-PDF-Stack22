@@ -66,7 +66,7 @@ module.exports = function(context) {
 
         (async function () {
           try {
-            console.log(context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+            //console.log(context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
             console.log('step 3 - start');
 
            /* await sftp.connect({
@@ -83,7 +83,8 @@ module.exports = function(context) {
            
 
             
-            await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+            //await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
+            await context.app.settings.sftp.put(Buffer.from(pdf.data), '/Html2PDF/Input/'+filename);
             //await sftp.end();
             console.log('step 3 - finish');
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};

@@ -37,7 +37,7 @@ module.exports = function(context) {
         rightOperand: context.result.download_id
       }; 
       console.log('step 2 - start');
-      client.dataExtensionRow({props, Name: 'Master_Send_Log_V2', filter}).get((err, response) => {
+      client.dataExtensionRow({props, Name: 'HTML_to_PDF_Send_Log_V2', filter}).get((err, response) => {
       //client.dataExtensionRow({props, Name: 'Master_Send_Log_V2_UAT - 20201007', filter}).get((err, response) => {
         //console.log(filter);
         //console.log(response);

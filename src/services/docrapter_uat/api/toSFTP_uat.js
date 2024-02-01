@@ -84,7 +84,7 @@ module.exports = function(context) {
 
             
             //await context.app.settings.sftp.put(Buffer.from(pdf.data), context.app.settings.printmatrix[SFMC.Communication_Name].Destination_Directory+filename);
-            await context.app.settings.sftp.put(Buffer.from(pdf.data), '/Html2PDF/Input/'+filename);
+            await context.app.settings.sftp_UAT.put(Buffer.from(pdf.data), '/Html2PDF/Input/'+filename);
             //await sftp.end();
             console.log('step 3 - finish');
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};

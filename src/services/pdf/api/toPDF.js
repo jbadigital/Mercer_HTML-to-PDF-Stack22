@@ -35,7 +35,10 @@ module.exports = async function(context) {
       ...context.data,
       status_id:JSON.parse(response.data.toString()).status_id
     }
-    console.log("test to ensure that docrapter returns a status id" ,context.result);
+
+    console.log('testing return from docrapter ' ,context.result.html,' |  ',context.result.guid,' | ',JSON.parse(response.data.toString()).status_id);
+
+    
     return context;
 
   } catch (err) {

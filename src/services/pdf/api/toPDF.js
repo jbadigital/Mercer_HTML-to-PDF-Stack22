@@ -36,7 +36,6 @@ module.exports = async function(context) {
       status_id:JSON.parse(response.data.toString()).status_id
     }
 
-    console.log('testing return from docrapter ' ,context.result.html,' |  ',context.result.guid,' | ',JSON.parse(response.data.toString()).status_id);
 
     
     return context;

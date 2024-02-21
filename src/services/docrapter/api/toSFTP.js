@@ -92,7 +92,7 @@ module.exports = function(context) {
             props.PDF_Status=context.result.download_id;
             props.PDF_Print_Processed = 1;
             props.PDF_Document_Name = filename;
-            props.PDF_Print_Processed_Date_AEST_2 = dt;
+            //props.PDF_Print_Processed_Date_AEST_2 = dt;
             console.log('step 4 - start');
             client.dataExtensionRow({props,keyField,Name: 'HTML to PDF - Status Log'}).patch((err, response) => {
 

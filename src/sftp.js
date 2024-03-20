@@ -13,12 +13,12 @@ module.exports = async function (app) {
     algorithms: {
       serverHostKey: ['ssh-rsa', 'ssh-dss']
     },
-    retries: 10,
-    retry_factor: 2,
-    retry_minTimeout: 2000,
-    readyTimeout: 10000000,
-    keepaliveInterval: 72000000, // 20 hours Interval
-    keepaliveCountMax: 3
+    //retries: 10,
+    //retry_factor: 2,
+    //retry_minTimeout: 2000,
+    //readyTimeout: 10000000,
+    //keepaliveInterval: 72000000, // 20 hours Interval
+    //keepaliveCountMax: 3
   });
   await app.set('sftp', sftp);
 

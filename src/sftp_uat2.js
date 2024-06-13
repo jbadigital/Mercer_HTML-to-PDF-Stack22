@@ -17,7 +17,7 @@ module.exports = async function (app) {
     //keepaliveInterval: 72000000, // 20 hours Interval
     //keepaliveCountMax: 3
   });
-  await app.set('sftp', sftp);
+  await app.set('sftp_UAT2', sftp_UAT2);
 
   logger.info('SFTP_UAT2 CONNECTED');
 

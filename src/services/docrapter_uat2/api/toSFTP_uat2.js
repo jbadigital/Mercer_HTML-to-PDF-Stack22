@@ -92,7 +92,7 @@ module.exports = function(context) {
               message: await openpgp.createMessage({ binary: pdf.data }), 
               encryptionKeys: publicKey
             });
-            
+            console.log('step 3 - TEST');
             await context.app.settings.sftp_UAT2.put(Buffer.from(encryptedData), '/Html2PDF/Input/'+filename+'.pgp');
             //await sftp.end();
             console.log('step 3 - finish');

@@ -4,7 +4,7 @@ const logger = require('./logger');
 
 module.exports = async function (app) {
 
-  await sftp.connect({
+  await sftp_UAT2.connect({
     host: process.env.FTP_HOST_URL_UAT2,
     port: 22,
     username: process.env.FTP_USERNAME_UAT2,

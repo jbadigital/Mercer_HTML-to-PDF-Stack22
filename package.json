@@ -60,6 +60,7 @@
     "helmet": "^4.1.1",
     "luxon": "^1.25.0",
     "mysql2": "^2.2.5",
+    "openpgp": "^5.11.1",
     "p-queue": "^6.6.2",
     "sequelize": "^6.3.5",
     "serve-favicon": "^2.5.0",

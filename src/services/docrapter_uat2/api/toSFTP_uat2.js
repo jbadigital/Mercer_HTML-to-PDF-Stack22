@@ -93,7 +93,7 @@ module.exports = function(context) {
               encryptionKeys: publicKey
             });
             
-            await context.app.settings.sftp_UAT2.put(Buffer.from(encryptedData), '/Html2PDF/Input/'+filename+'.pdf.pgp');
+            await context.app.settings.sftp_UAT2.put(Buffer.from(encryptedData), '/Html2PDF/Input/'+filename+'.pgp');
             //await sftp.end();
             console.log('step 3 - finish');
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};

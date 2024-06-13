@@ -1,4 +1,4 @@
-const toSFTP_uat = require('./api/toSFTP_uat2');
+const toSFTP_uat2 = require('./api/toSFTP_uat2');
 
 module.exports = {
   before: {

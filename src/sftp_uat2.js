@@ -1,5 +1,5 @@
 const SFTP = require('ssh2-sftp-client');
-const sftp = new SFTP();
+const sftp_UAT2 = new SFTP();
 const logger = require('./logger');
 
 module.exports = async function (app) {

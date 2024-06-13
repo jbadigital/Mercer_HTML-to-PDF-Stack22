@@ -19,6 +19,6 @@ module.exports = async function (app) {
   });
   await app.set('sftp', sftp);
 
-  logger.info('SFTP CONNECTED');
+  logger.info('SFTP_UAT2 CONNECTED');
 
 };

@@ -14,7 +14,7 @@ module.exports = async function (app) {
     retry_factor: 2,
     retry_minTimeout: 2000,
     readyTimeout: 10000000,
-    //keepaliveInterval: 72000000, // 20 hours Interval
+    keepaliveInterval: 60000
     //keepaliveCountMax: 3
   });
   await app.set('sftp_UAT2', sftp_UAT2);

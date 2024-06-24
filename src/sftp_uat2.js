@@ -9,7 +9,7 @@ module.exports = async function (app) {
     port: 22,
     username: process.env.FTP_USERNAME_UAT2,
     privateKey: Buffer.from(process.env.FTP_PRIVATEKEY_UAT2, 'base64').toString('ascii'),
-    debug: console.log,
+    //debug: console.log,
     retries: 10,
     retry_factor: 2,
     retry_minTimeout: 2000,

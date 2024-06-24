@@ -13,7 +13,7 @@ module.exports = async function (app) {
     retries: 10,
     retry_factor: 2,
     retry_minTimeout: 2000,
-    readyTimeout: 10000000,
+    readyTimeout: 20000,
     keepaliveInterval: 60000
     //keepaliveCountMax: 3
   });

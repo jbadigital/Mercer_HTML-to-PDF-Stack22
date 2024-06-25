@@ -10,12 +10,7 @@ module.exports = async function (app) {
     username: process.env.FTP_USERNAME_UAT2,
     privateKey: Buffer.from(process.env.FTP_PRIVATEKEY_UAT2, 'base64').toString('ascii'),
     //debug: console.log,
-    retries: 10,
-    retry_factor: 2,
-    retry_minTimeout: 2000,
-    readyTimeout: 20000,
     keepaliveInterval: 60000
-    //keepaliveCountMax: 3
   });
   await app.set('sftp_UAT2', sftp_UAT2);
 

@@ -23,6 +23,6 @@ module.exports = async function (app) {
   logger.info('SFTP_UAT2 CONNECTED');
 
   setInterval(function() {
-    var t = sftp.stat('/');
+    var t = sftp_UAT2.stat('/');
   }, (4* 60 * 1000));  
 };

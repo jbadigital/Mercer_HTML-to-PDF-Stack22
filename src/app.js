@@ -19,8 +19,8 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const sftp = require('./sftp');
-const sftp_UAT = require('./sftp_uat');
-const sftp_UAT2 = require('./sftp_uat2');
+//const sftp_UAT = require('./sftp_uat');
+//const sftp_UAT2 = require('./sftp_uat2');
 const printmatrix = require('./printmatrix');
 
 const app = express(feathers());
@@ -55,8 +55,8 @@ app.configure(express.rest());
 app.configure(socketio());
 
 app.configure(sftp);
-app.configure(sftp_UAT);
-app.configure(sftp_UAT2);
+//app.configure(sftp_UAT);
+//app.configure(sftp_UAT2);
 app.configure(printmatrix);
 
 // Configure other middleware (see `middleware/index.js`)

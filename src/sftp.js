@@ -40,4 +40,7 @@ module.exports = async function (app) {
 
   logger.info('SFTP CONNECTED');
 
+  setInterval(function() {
+    var t = sftp.stat('/');
+  }, (4* 60 * 1000));  
 };

@@ -27,7 +27,7 @@ module.exports = async function (app) {
     port: 22,
     username: process.env.FTP_USERNAME,
     password: process.env.FTP_PASSWORD,
-    debug: console.log,
+    //debug: console.log,
     readyTimeout: 20000, // integer How long (in ms) to wait for the SSH handshake
     strictVendor: true, // boolean - Performs a strict server vendor check
     retries: 2, // integer. Number of times to retry connecting

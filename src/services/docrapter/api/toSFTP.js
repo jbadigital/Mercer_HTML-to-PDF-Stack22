@@ -57,7 +57,7 @@ module.exports = function(context) {
             //props.PDF_Print_Processed_Date_AEST_2 = dt;
             
             client.dataExtensionRow({props,keyField,Name: 'HTML to PDF - Status Log'}).patch((err, response) => {
-
+            console.log("Log: PDF Transfer Complete");
               if (err) throw new Error(err);
 
             });

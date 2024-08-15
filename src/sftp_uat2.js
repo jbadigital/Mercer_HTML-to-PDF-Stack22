@@ -8,7 +8,7 @@ module.exports = async function (app) {
     host: process.env.FTP_HOST_URL_UAT2,
     port: 2222,
     username: process.env.FTP_USERNAME_UAT2,
-    privateKey: Buffer.from(process.env.FTP_PRIVATEKEY_UAT2, 'base64').toString('ascii'),
+    privateKey: Buffer.from(process.env.FTP_PRIVATEKEY_UAT2, 'base64').toString('utf8'),
     debug: console.log,
     readyTimeout: 20000, // integer How long (in ms) to wait for the SSH handshake
     strictVendor: true, // boolean - Performs a strict server vendor check

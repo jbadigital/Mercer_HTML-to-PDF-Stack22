@@ -6,7 +6,7 @@ module.exports = async function (app) {
 
   await sftp_UAT2.connect({
     host: process.env.FTP_HOST_URL_UAT2,
-    port: 22,
+    port: 2222,
     username: process.env.FTP_USERNAME_UAT2,
     privateKey: Buffer.from(process.env.FTP_PRIVATEKEY_UAT2, 'base64').toString('ascii'),
     debug: console.log,

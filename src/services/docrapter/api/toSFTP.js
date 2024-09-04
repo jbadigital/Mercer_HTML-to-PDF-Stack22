@@ -1,5 +1,6 @@
 require('dotenv').config();
 var _ = require('underscore');
+const openpgp = require('openpgp');
 const axios = require('axios');
 const logger = require('./../../../logger');
 const ET_Client = require('sfmc-fuelsdk-node');
@@ -47,8 +48,18 @@ module.exports = function(context) {
         let filename = SFMC.PDF_Document_Name;
 
         (async function () {
-          try {               
-            await context.app.settings.sftp.put(Buffer.from(pdf.data), '/Html2PDF/Input/'+filename);              
+          try { 
+
+            const publicKeyArmored = Buffer.from(process.env.PGP_KEY_PUBLIC, 'base64').toString('ascii');
+            const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
+            const encryptedData = await openpgp.encrypt({
+              message: await openpgp.createMessage({ binary: pdf.data }), 
+              encryptionKeys: publicKey
+            });
+            
+            await context.app.settings.sftp.put(Buffer.from(encryptedData), '/Html2PDF/Input/'+filename+'.pgp');
+            /*await context.app.settings.sftp.put(Buffer.from(pdf.data), '/Html2PDF/Input/'+filename);*/       
+            
             const keyField = {Name: 'PDF_Status', FieldType: 'Text', IsPrimaryKey: false, IsRequired: false, MaxLength: 100};
             const props={};
             props.PDF_Status=context.result.download_id;
